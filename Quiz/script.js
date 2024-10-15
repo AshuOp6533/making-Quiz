@@ -10,7 +10,8 @@ let arr = [
     answer: "Object-Based",
   },
   {
-    question: "Which one of the following is also known as Conditional Expression?",
+    question:
+      "Which one of the following is also known as Conditional Expression?",
     options: [
       "Alternative",
       "Switch statement",
@@ -30,7 +31,8 @@ let arr = [
     answer: "All of the above",
   },
   {
-    question: "When the interpreter encounters an empty statement, what will it do?",
+    question:
+      "When the interpreter encounters an empty statement, what will it do?",
     options: [
       "Throw an error",
       "Ignore it",
@@ -50,7 +52,8 @@ let arr = [
     answer: "All of the above",
   },
   {
-    question: "Which method is used to convert a JSON string into a JavaScript object?",
+    question:
+      "Which method is used to convert a JSON string into a JavaScript object?",
     options: [
       "JSON.parse()",
       "JSON.stringify()",
@@ -65,7 +68,8 @@ let arr = [
     answer: "=",
   },
   {
-    question: "What will be the output of the following code: console.log(typeof NaN)?",
+    question:
+      "What will be the output of the following code: console.log(typeof NaN)?",
     options: ["number", "undefined", "object", "NaN"],
     answer: "number",
   },
@@ -75,13 +79,9 @@ let arr = [
     answer: "Django",
   },
   {
-    question: "Which method can be used to round a number to the nearest integer in JavaScript?",
-    options: [
-      "Math.floor()",
-      "Math.ceil()",
-      "Math.round()",
-      "Math.trunc()",
-    ],
+    question:
+      "Which method can be used to round a number to the nearest integer in JavaScript?",
+    options: ["Math.floor()", "Math.ceil()", "Math.round()", "Math.trunc()"],
     answer: "Math.round()",
   },
   {
@@ -95,12 +95,13 @@ let arr = [
     answer: "true",
   },
   {
-    question: "Which symbol is used for comments in JavaScript?",
+    question: "Which symbol is used for single line comment in JavaScript?",
     options: ["//", "#", "/* */", "<!-- -->"],
     answer: "//",
   },
   {
-    question: "Which JavaScript method is used to access an HTML element by its id?",
+    question:
+      "Which JavaScript method is used to access an HTML element by its id?",
     options: [
       "getElementByClassName()",
       "getElementByTagName()",
@@ -120,7 +121,8 @@ let arr = [
     answer: "The current object",
   },
   {
-    question: "Which of the following function definitions is valid in JavaScript?",
+    question:
+      "Which of the following function definitions is valid in JavaScript?",
     options: [
       "function myFunction() {}",
       "def myFunction() {}",
@@ -180,15 +182,26 @@ function displayQuestion() {
   quizContainer.innerHTML = `<h2>${questionObj.question}</h2>
     <div id="options">${optionsHtml}</div>`;
 
-  questionListContainer.innerHTML = randomQuestions.map((_, index) => {
-    return `<button class="question-number" data-index="${index}">${index + 1}</button>`;
-  }).join(' ');
+  questionListContainer.innerHTML = randomQuestions
+    .map((_, index) => {
+      return `<button class="question-number" data-index="${index}">${
+        index + 1
+      }</button>`;
+    })
+    .join(" ");
 
   document.getElementById("next").disabled = true;
 
-  document.getElementById("previous").style.display = currentQuestionIndex === 0 ? "none" : "inline-block";
-  document.getElementById("next").style.display = currentQuestionIndex === randomQuestions.length - 1 ? "none" : "inline-block";
-  document.getElementById("submit").style.display = currentQuestionIndex === randomQuestions.length - 1 ? "inline-block" : "none";
+  document.getElementById("previous").style.display =
+    currentQuestionIndex === 0 ? "none" : "inline-block";
+  document.getElementById("next").style.display =
+    currentQuestionIndex === randomQuestions.length - 1
+      ? "none"
+      : "inline-block";
+  document.getElementById("submit").style.display =
+    currentQuestionIndex === randomQuestions.length - 1
+      ? "inline-block"
+      : "none";
 
   const radioButtons = document.querySelectorAll('input[name="option"]');
   radioButtons.forEach((rb) => {
@@ -197,10 +210,10 @@ function displayQuestion() {
     });
   });
 
-  const questionNumberButtons = document.querySelectorAll('.question-number');
-  questionNumberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      currentQuestionIndex = parseInt(button.getAttribute('data-index'));
+  const questionNumberButtons = document.querySelectorAll(".question-number");
+  questionNumberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentQuestionIndex = parseInt(button.getAttribute("data-index"));
       displayQuestion();
     });
   });
@@ -211,6 +224,8 @@ function handleNextButtonClick() {
   if (selectedOption) {
     if (selectedOption.value === randomQuestions[currentQuestionIndex].answer) {
       score++;
+      console.log(score);
+      
     }
     currentQuestionIndex++;
     displayQuestion();
@@ -233,7 +248,7 @@ function showResults() {
   const scorePercent = (score / randomQuestions.length) * 100;
   const qualificationMessage =
     scorePercent >= 60 ? "You are qualified!" : "You are not qualified.";
-  resultDiv.innerHTML = `<h2>You Scored: ${scorePercent.toFixed(2)}%</h2>
+  resultDiv.innerHTML = `<h2>You Scored: ${scorePercent}%</h2>
                          <h3>${qualificationMessage}</h3>`;
   resultDiv.style.display = "block";
   document.getElementById("next").style.display = "none";
@@ -241,11 +256,23 @@ function showResults() {
   document.getElementById("submit").style.display = "none";
 }
 
-function handleSubmitButtonClick() {
+function handleSubmitClick() {
+  const selectedOption = document.querySelector('input[name="option"]:checked');
+  if (selectedOption) {
+    if (selectedOption.value === randomQuestions[currentQuestionIndex].answer) {
+      score++;
+      console.log(score);
+      
+    }
+  }
   showResults();
 }
 
 displayQuestion();
-document.getElementById("next").addEventListener("click", handleNextButtonClick);
-document.getElementById("previous").addEventListener("click", handlePreviousButtonClick);
-document.getElementById("submit").addEventListener("click", handleSubmitButtonClick);
+document
+  .getElementById("next")
+  .addEventListener("click", handleNextButtonClick);
+document
+  .getElementById("previous")
+  .addEventListener("click", handlePreviousButtonClick);
+document.getElementById("submit").addEventListener("click", handleSubmitClick);
