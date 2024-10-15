@@ -223,9 +223,7 @@ function handleNextButtonClick() {
   const selectedOption = document.querySelector('input[name="option"]:checked');
   if (selectedOption) {
     if (selectedOption.value === randomQuestions[currentQuestionIndex].answer) {
-      score++;
-      console.log(score);
-      
+      score++;      
     }
     currentQuestionIndex++;
     displayQuestion();
@@ -260,9 +258,7 @@ function handleSubmitClick() {
   const selectedOption = document.querySelector('input[name="option"]:checked');
   if (selectedOption) {
     if (selectedOption.value === randomQuestions[currentQuestionIndex].answer) {
-      score++;
-      console.log(score);
-      
+      score++;      
     }
   }
   showResults();
